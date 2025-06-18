@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>박스오피스 조회</title>
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+              background-color: #f5f5f5;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+        }
+        h1 {
+          color: #333;
+        }
+        .input-group {
+          margin-bottom: 20px;
+        }
+        input[type="date"] {
+          padding: 8px;
+          font-size: 16px;
+        }
+        button {
+          padding: 8px 16px;
+          font-size: 16px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #0056b3;
+        }
+        .movie-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 15px;
+        }
+        .movie-card {
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          padding: 15px;
+          width: 250px;
+          text-align: left;
+        }
+        .movie-card h3 {
+          margin: 0 0 8px 0;
+          font-size: 20px;
+        }
+        .movie-card p {
+          margin: 4px 0;
+          color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <a th:href="@{/}" style="text-decoration: none; color:white">
+        <h3>영화 예매 사이트</h3>
+    </a>
+</div>
+<div class="body">
+    <div class="leftSideBar"></div>
+    <div class= "content">
+        body
+    </div>
+    <div class="rightSideBar">
+        <button class="w-100 btn" type="button"
+                th:onclick="|location.href='@{/login}'|">
+            로그인
+        </button>
+
+        <button class="w-100 btn" type="button"
+                th:onclick="|location.href='@{/signup}'|">
+            회원가입
+        </button>
+    </div>
+</div>
+<div class="footer">바닥</div>
+<h1>박스오피스 조회</h1>
+<div class="input-group">
+<!--    js로 넘어가는 id=dateInput-->
+    <input type="date" id="dateInput" />
+    <button id="dateBtn">조회</button>
+</div>
+<div class="movie-list" th:id="movieList">
+    <!-- 영화 카드들이 여기에 렌더링됩니다. -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/dailyMovie.js"></script>
+
+</body>
+</html>
+

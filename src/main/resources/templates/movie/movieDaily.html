@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>박스오피스 조회</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f5f5f5;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+        }
+        h1 {
+          color: #333;
+        }
+        .input-group {
+          margin-bottom: 20px;
+        }
+        input[type="date"] {
+          padding: 8px;
+          font-size: 16px;
+        }
+        button {
+          padding: 8px 16px;
+          font-size: 16px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #0056b3;
+        }
+        .movie-list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 15px;
+        }
+        .movie-card {
+          background-color: #fff;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          padding: 15px;
+          width: 250px;
+          text-align: left;
+        }
+        .movie-card h3 {
+          margin: 0 0 8px 0;
+          font-size: 20px;
+        }
+        .movie-card p {
+          margin: 4px 0;
+          color: #555;
+        }
+    </style>
+</head>
+<body>
+<h1>박스오피스 조회</h1>
+<div class="input-group">
+    <input type="date" id="dateInput" />
+    <button onclick="fetchDailyMovie()">조회</button>
+</div>
+<div class="movie-list" id="movieList">
+    <!-- 영화 카드들이 여기에 렌더링됩니다. -->
+</div>
+
+<script>
+    async <functi></functi>on fetchDailyMovie() {
+      const date = document.getElementById('dateInput').value;
+      if (!date) {
+        alert("날짜를 선택해주세요.");
+        return;
+      }
+
+      // YYYY-MM-DD -> YYYYMMDD 형식 변환
+      const formattedDate = date.replace(/-/g, '');
+
+      // API 요청
+      const url = `/api/daily_movie?date=${formattedDate}`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("네트워크 응답이 정상이 아닙니다.");
+        }
+        const data = await response.json();
+
+        const movieList = document.getElementById('movieList');
+        movieList.innerHTML = ""; // 기존 내용 초기화
+
+        const movies = data.boxOfficeResult.dailyBoxOfficeList;
+        if (!movies || movies.length === 0) {
+          movieList.innerHTML = "<p>조회된 데이터가 없습니다.</p>";
+          return;
+        }
+
+        movies.forEach(movie => {
+          const card = document.createElement('div');
+          card.classList.add('movie-card');
+          card.innerHTML = `
+            <h3>${movie.rank}. ${movie.movieNm}</h3>
+            <p><strong>개봉일:</strong> ${movie.openDt}</p>
+            <p><strong>영화 코드:</strong> ${movie.movieCd}</p>
+          `;
+          movieList.appendChild(card);
+        });
+
+      } catch (error) {
+        console.error("데이터를 불러오는데 문제가 발생했습니다:", error);
+        alert("데이터를 가져오는 중 오류가 발생했습니다.");
+      }
+    }
+</script>
+
+</body>
+</html>

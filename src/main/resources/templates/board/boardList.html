@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+</head>
+<body>
+<div class="layout">
+    <table>
+        <thead>
+        <tr>
+            <th>글번호</th>
+            <th>글 제목</th>
+            <th>작성자</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="list:${boardList}"
+            th:onclick="|location.href='@{/board/boardNumber/{id}(id=${list.id})}'|"
+            style="cursor:pointer;">
+            <td th:text="${list.id}">1</td>
+            <td th:text="${list.boardTitle}">제목</td>
+            <td th:text="${list.user.loginId}">유저</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
