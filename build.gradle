@@ -32,8 +32,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-devtools'
+	implementation 'com.google.code.gson:gson:2.10.1'
 
-	// https://mvnrepository.com/artifact/org.jsoup/jsoup
+ 	// Selenium (Java)
+	implementation 'org.seleniumhq.selenium:selenium-java:4.11.0'
+
+	//gson
 	implementation("org.jsoup:jsoup:1.7.2")
 
 	compileOnly 'org.projectlombok:lombok'
